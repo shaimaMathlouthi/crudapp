@@ -55,7 +55,7 @@ class CustomCardTextForm extends StatelessWidget {
                   focusedBorder: InputBorder.none,
                   enabledBorder: InputBorder.none,
                   disabledBorder: InputBorder.none,
-                  hintStyle: TextStyle(fontSize: 17.sp.clamp(20, 30))),
+                  hintStyle: TextStyle(fontSize: 14.sp.clamp(16, 24))),
               minLines: minLines ?? 1,
               maxLines: maxLines ?? 1,
               validator: validator,
