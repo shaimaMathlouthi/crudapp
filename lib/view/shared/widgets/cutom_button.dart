@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 class CustomButton extends StatelessWidget {
   final String title;
@@ -10,20 +11,20 @@ class CustomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        padding:
-            const EdgeInsets.only(top: 20, bottom: 20, left: 101, right: 101),
         height: 63,
-        width: 300,
+        width: 80.w,
         decoration: BoxDecoration(
           color: const Color(0x797BC5FA),
           borderRadius: BorderRadius.circular(14),
         ),
-        child: Text(
-          title,
-          style: const TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-            color: Color.fromARGB(121, 2, 131, 223),
+        child: Center(
+          child: Text(
+            title,
+            style: const TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: Color(0x790283DF),
+            ),
           ),
         ));
   }
