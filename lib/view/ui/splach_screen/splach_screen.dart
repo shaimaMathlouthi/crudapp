@@ -53,7 +53,7 @@ class _SplachScreenState extends State<SplachScreen> {
               style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
-                  color: Color.fromARGB(121, 177, 177, 177)),
+                  color: Color.fromARGB(121, 139, 139, 139)),
             ),
           ],
         ),

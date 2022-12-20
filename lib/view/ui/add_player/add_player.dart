@@ -2,6 +2,9 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:my_crud_app/view/shared/widgets/custom_text_form.dart';
 import 'package:my_crud_app/view/shared/widgets/cutomized_text_form.dart';
+import 'package:my_crud_app/view/shared/widgets/cutom_button.dart';
+import 'package:my_crud_app/view/ui/add_user_success/add_user_success_showmodal.dart';
+import 'package:my_crud_app/view/ui/home/home.dart';
 
 class AddPlayer extends StatefulWidget {
   const AddPlayer({Key? key}) : super(key: key);
@@ -20,7 +23,22 @@ class _AddPlayerState extends State<AddPlayer> {
         child: Column(
           children: [
             const SizedBox(
-              height: 60,
+              height: 50,
+            ),
+            Container(
+              alignment: Alignment.centerLeft,
+              child: InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const HomePage()),
+                  );
+                },
+                child: Image.asset("assets/images/back.png"),
+              ),
+            ),
+            const SizedBox(
+              height: 20,
             ),
             const AutoSizeText(
               "Add a new player to your Team !",
@@ -65,42 +83,14 @@ class _AddPlayerState extends State<AddPlayer> {
                 showDialog(
                     context: context,
                     builder: (context) {
-                      return AlertDialog(
-                        titlePadding: const EdgeInsets.all(10),
-                        title: Image.asset(
-                          "assets/images/tick.png",
-                          height: 50,
-                          width: 50,
-                        ),
-                        contentPadding: const EdgeInsets.only(
-                            left: 40, right: 40, bottom: 20),
-                        content: const Text("Player added sucessufully",
-                            style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.w700)),
-                      );
+                      return const SucessModal(text: 'User added successfully');
                     });
               },
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-                child: Container(
-                  height: 60,
-                  decoration: BoxDecoration(
-                    color: const Color.fromARGB(121, 123, 197, 250),
-                    borderRadius: BorderRadius.circular(14),
-                  ),
-                  child: const Center(
-                    child: Text(
-                      "Add player",
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Color.fromARGB(121, 2, 131, 223),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
+              child: const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+                  child: CustomButton(
+                    title: 'Add player',
+                  )),
             )
           ],
         ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'view/ui/splach_screen/splach_screen.dart';
+//import 'package:my_crud_app/view/ui/empty_home/empty_home.dart';
 
 void main() {
   runApp(const MyApp());

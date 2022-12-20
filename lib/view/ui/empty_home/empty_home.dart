@@ -1,26 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:my_crud_app/view/ui/add_player/add_player.dart';
 import 'package:my_crud_app/view/shared/widgets/custom_text_form.dart';
-import 'package:my_crud_app/view/ui/widgets/player_card.dart';
 import 'package:my_crud_app/view/shared/widgets/cutom_button.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+class EmptyHome extends StatefulWidget {
+  const EmptyHome({Key? key}) : super(key: key);
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<EmptyHome> createState() => _EmptyHomeState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _EmptyHomeState extends State<EmptyHome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        clipBehavior: Clip.none,
-        alignment: Alignment.center,
-        children: [
-          SingleChildScrollView(
-            child: Padding(
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Padding(
               padding: const EdgeInsets.all(20),
               child: Column(
                 children: [
@@ -60,31 +57,47 @@ class _HomePageState extends State<HomePage> {
                       )
                     ]),
                   ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  ...List.generate(4, (index) => const PlayerCard()),
-                  const SizedBox(
-                    height: 200,
-                  ),
                 ],
               ),
             ),
-          ),
-          Positioned(
-            bottom: 40,
-            child: GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const AddPlayer()),
-                  );
-                },
-                child: const CustomButton(
-                  title: 'Add player',
-                )),
-          )
-        ],
+            const SizedBox(
+              height: 40,
+            ),
+            Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 40),
+                  child: Image.asset("assets/images/empty.png"),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                const Text("Your Team is empty ! Add your first player",
+                    style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                        color: Color.fromARGB(121, 139, 139, 139)))
+              ],
+            ),
+            const SizedBox(
+              height: 100,
+            ),
+            Positioned(
+              bottom: 40,
+              child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const AddPlayer()),
+                    );
+                  },
+                  child: const CustomButton(
+                    title: 'Add player',
+                  )),
+            ),
+          ],
+        ),
       ),
     );
   }
