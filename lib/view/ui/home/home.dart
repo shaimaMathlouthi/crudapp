@@ -3,6 +3,9 @@ import 'package:my_crud_app/view/ui/add_player/add_player.dart';
 import 'package:my_crud_app/view/shared/widgets/custom_text_form.dart';
 import 'package:my_crud_app/view/ui/widgets/player_card.dart';
 import 'package:my_crud_app/view/shared/widgets/cutom_button.dart';
+import 'package:provider/provider.dart';
+
+import '../../../controller/player_controller.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -63,7 +66,12 @@ class _HomePageState extends State<HomePage> {
                   const SizedBox(
                     height: 20,
                   ),
-                  ...List.generate(4, (index) => const PlayerCard()),
+                  //...List.generate(4, (index) => const PlayerCard()),
+                  Consumer<PlayerController>(
+                      builder: (context, value, child) => ListView.builder(
+                            itemCount: value.players.length,
+                            itemBuilder: (context, index) => PlayerCard(),
+                          )),
                   const SizedBox(
                     height: 200,
                   ),
