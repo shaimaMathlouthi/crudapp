@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:my_crud_app/view/shared/widgets/cutomized_text_form.dart';
 import 'package:my_crud_app/view/ui/add_player/add_player.dart';
-import 'package:my_crud_app/view/shared/widgets/custom_text_form.dart';
+
 import 'package:my_crud_app/view/ui/widgets/player_card.dart';
 import 'package:my_crud_app/view/shared/widgets/cutom_button.dart';
 import 'package:provider/provider.dart';
@@ -38,40 +39,40 @@ class _HomePageState extends State<HomePage> {
                   const SizedBox(
                     height: 20,
                   ),
-                  Card(
-                    elevation: 3,
-                    shadowColor: const Color(0x1F323232),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(14)),
-                    child: Row(children: [
-                      Container(
-                        width: 65,
-                        decoration: const BoxDecoration(
-                            color: Color(0x797BC5FA),
-                            borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(14),
-                                bottomLeft: Radius.circular(14))),
-                        child: Image.asset(
-                          "assets/images/search.png",
-                          color: const Color(0x790283DF),
-                        ),
-                      ),
-                      Expanded(
-                        child: CustomCardTextForm(
-                          hintText: 'Search for a footballer...',
-                        ),
-                      )
-                    ]),
+                  CustomizedTextForm(
+                    iconPath: "assets/images/search.png",
+                    title: 'Search for a footballer...',
+                    controller: ,
                   ),
                   const SizedBox(
                     height: 20,
                   ),
                   //...List.generate(4, (index) => const PlayerCard()),
                   Consumer<PlayerController>(
-                      builder: (context, value, child) => ListView.builder(
-                            itemCount: value.players.length,
-                            itemBuilder: (context, index) => PlayerCard(),
-                          )),
+                      builder: (context, value, child) => value.players.isEmpty
+                          ? Column(
+                              children: [
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 40),
+                                  child: Image.asset("assets/images/empty.png"),
+                                ),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                const Text(
+                                    "Your Team is empty ! Add your first player",
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w500,
+                                        color:
+                                            Color.fromARGB(121, 139, 139, 139)))
+                              ],
+                            )
+                          : ListView.builder(
+                              itemCount: value.players.length,
+                              itemBuilder: (context, index) => PlayerCard(),
+                            )),
                   const SizedBox(
                     height: 200,
                   ),

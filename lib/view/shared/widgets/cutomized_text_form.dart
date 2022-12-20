@@ -1,13 +1,21 @@
 import 'package:flutter/material.dart';
-
-import 'custom_text_form.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 class CustomizedTextForm extends StatelessWidget {
   final String title;
   final String iconPath;
+  TextInputType? textInputType;
 
-  const CustomizedTextForm(
-      {Key? key, required this.title, required this.iconPath})
+  String? Function(String?)? validator;
+  TextEditingController? controller = TextEditingController();
+
+  CustomizedTextForm(
+      {Key? key,
+      required this.title,
+      required this.iconPath,
+      required this.controller,
+      this.textInputType,
+      this.validator})
       : super(key: key);
 
   @override
@@ -38,8 +46,34 @@ class CustomizedTextForm extends StatelessWidget {
           ),
           Expanded(
               flex: 8,
-              child: CustomCardTextForm(
-                hintText: title,
+              child: SizedBox(
+                height: 8.h.clamp(65, 95),
+                child: Card(
+                  elevation: 0,
+                  child: Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
+                    child: Center(
+                      child: TextFormField(
+                        style: TextStyle(fontSize: 14.sp.clamp(16, 24)),
+                        keyboardType: textInputType ?? TextInputType.name,
+                        controller: controller,
+                        textAlign: TextAlign.start,
+                        decoration: InputDecoration(
+                            hintText: title,
+                            errorStyle:
+                                TextStyle(fontSize: 15.sp.clamp(18, 25)),
+                            border: InputBorder.none,
+                            focusedBorder: InputBorder.none,
+                            enabledBorder: InputBorder.none,
+                            disabledBorder: InputBorder.none,
+                            hintStyle:
+                                TextStyle(fontSize: 14.sp.clamp(16, 24))),
+                        validator: validator,
+                      ),
+                    ),
+                  ),
+                ),
               ))
         ]),
       ),

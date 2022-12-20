@@ -1,6 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:my_crud_app/view/shared/widgets/custom_text_form.dart';
+
 import 'package:my_crud_app/view/shared/widgets/cutomized_text_form.dart';
 import 'package:my_crud_app/view/shared/widgets/cutom_button.dart';
 import 'package:my_crud_app/view/ui/add_user_success/add_user_success_showmodal.dart';
@@ -14,6 +14,7 @@ class AddPlayer extends StatefulWidget {
 }
 
 class _AddPlayerState extends State<AddPlayer> {
+  TextEditingController name = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,7 +59,7 @@ class _AddPlayerState extends State<AddPlayer> {
             const SizedBox(
               height: 13,
             ),
-            const CustomizedTextForm(
+            CustomizedTextForm(
                 title: "Full name", iconPath: "assets/images/profile.png"),
             const SizedBox(
               height: 8,
