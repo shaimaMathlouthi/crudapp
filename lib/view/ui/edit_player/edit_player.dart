@@ -10,14 +10,15 @@ import 'package:provider/provider.dart';
 
 import '../../../controller/player_controller.dart';
 
-class AddPlayer extends StatefulWidget {
-  const AddPlayer({Key? key}) : super(key: key);
+class EditPlayer extends StatefulWidget {
+  final Player player;
+  const EditPlayer({Key? key, required this.player}) : super(key: key);
 
   @override
-  State<AddPlayer> createState() => _AddPlayerState();
+  State<EditPlayer> createState() => _EditPlayerState();
 }
 
-class _AddPlayerState extends State<AddPlayer> {
+class _EditPlayerState extends State<EditPlayer> {
   TextEditingController name = TextEditingController();
   TextEditingController id = TextEditingController();
   TextEditingController position = TextEditingController();
@@ -51,23 +52,13 @@ class _AddPlayerState extends State<AddPlayer> {
             const SizedBox(
               height: 20,
             ),
-            const AutoSizeText(
-              "Add a new player to your Team !",
+            AutoSizeText(
+              "Edit ${widget.player.name}!",
               maxLines: 1,
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             const SizedBox(
               height: 15,
-            ),
-            const Text(
-              "To add a new player your equipe simply fill up this form",
-              style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                  color: Color.fromARGB(121, 120, 120, 120)),
-            ),
-            const SizedBox(
-              height: 13,
             ),
             Form(
               key: formstate,
@@ -81,7 +72,7 @@ class _AddPlayerState extends State<AddPlayer> {
                         return null;
                       },
                       controller: name,
-                      title: "Full name",
+                      title: "${widget.player.name}",
                       iconPath: "assets/images/profile.png"),
                   const SizedBox(
                     height: 8,
@@ -99,7 +90,7 @@ class _AddPlayerState extends State<AddPlayer> {
                       },
                       textInputType: TextInputType.number,
                       controller: id,
-                      title: "ID",
+                      title: "${widget.player.id}",
                       iconPath: "assets/images/id.png"),
                   const SizedBox(
                     height: 8,
@@ -112,7 +103,7 @@ class _AddPlayerState extends State<AddPlayer> {
                         return null;
                       },
                       controller: position,
-                      title: "Position",
+                      title: "${widget.player.position}",
                       iconPath: "assets/images/position.png"),
                   const SizedBox(
                     height: 8,
@@ -130,7 +121,7 @@ class _AddPlayerState extends State<AddPlayer> {
                       },
                       textInputType: TextInputType.number,
                       controller: salary,
-                      title: "Salary",
+                      title: "${widget.player.salary}",
                       iconPath: "assets/images/salary.png"),
                   const SizedBox(
                     height: 70,
@@ -141,21 +132,14 @@ class _AddPlayerState extends State<AddPlayer> {
             Consumer<PlayerController>(
               builder: (context, value, child) => GestureDetector(
                 onTap: () {
-                  if (formstate.currentState!.validate()) {
-                    value.addPlayer(Player(
-                        id: int.parse(id.text),
-                        name: name.text,
-                        position: position.text,
-                        salary: int.parse(salary.text)));
-                    Navigator.pop(context);
-                    showDialog(
-                        context: context,
-                        builder: (context) {
-                          return const SucessModal(
-                              text: 'User added successfully');
-                        });
-                  }
-                  ;
+                  value.updatePlayer(
+                      widget.player,
+                      Player(
+                          id: int.parse(id.text),
+                          name: name.text,
+                          position: position.text,
+                          salary: int.parse(salary.text)));
+                  Navigator.pop(context);
                 },
                 child: const Padding(
                     padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),

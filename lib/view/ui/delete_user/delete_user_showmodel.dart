@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:my_crud_app/model/player_model.dart';
+import 'package:provider/provider.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
+import '../../../controller/player_controller.dart';
+
 class DeleteUser extends StatelessWidget {
-  const DeleteUser({Key? key}) : super(key: key);
+  final Player player;
+  const DeleteUser({Key? key, required this.player}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -32,34 +37,47 @@ class DeleteUser extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                const SizedBox(
-                  height: 50,
-                  width: 120,
-                  child: Center(
-                    child: Text(
-                      "Cancel",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: Color.fromARGB(121, 2, 131, 223),
+                InkWell(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: const SizedBox(
+                    height: 50,
+                    width: 120,
+                    child: Center(
+                      child: Text(
+                        "Cancel",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Color.fromARGB(121, 2, 131, 223),
+                        ),
                       ),
                     ),
                   ),
                 ),
-                Container(
-                  height: 50,
-                  width: 120,
-                  decoration: BoxDecoration(
-                    color: const Color.fromARGB(121, 123, 197, 250),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: const Center(
-                    child: Text(
-                      "Delete",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: Color.fromARGB(121, 2, 131, 223),
+                Consumer<PlayerController>(
+                  builder: (context, value, child) => InkWell(
+                    onTap: () {
+                      value.deletePlayer(player);
+                      Navigator.pop(context);
+                    },
+                    child: Container(
+                      height: 50,
+                      width: 120,
+                      decoration: BoxDecoration(
+                        color: const Color.fromARGB(121, 123, 197, 250),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: const Center(
+                        child: Text(
+                          "Delete",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Color.fromARGB(121, 2, 131, 223),
+                          ),
+                        ),
                       ),
                     ),
                   ),

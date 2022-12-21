@@ -10,9 +10,19 @@ class PlayerController extends ChangeNotifier {
     notifyListeners();
   }
 
-  void deletePlayer() {}
+  void deletePlayer(Player player) {
+    players.remove(player);
+    notifyListeners();
+  }
 
-  void updatePlayer() {}
+  void updatePlayer(Player oldPlayer, Player newPlayer) {
+    oldPlayer.name = newPlayer.name;
+    oldPlayer.id = newPlayer.id;
+    oldPlayer.position = newPlayer.position;
+    oldPlayer.salary = newPlayer.salary;
 
-  void searchPlayer() {}
+    notifyListeners();
+  }
+
+  void searchPlayer(int id) {}
 }

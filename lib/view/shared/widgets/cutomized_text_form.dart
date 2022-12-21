@@ -5,18 +5,20 @@ class CustomizedTextForm extends StatelessWidget {
   final String title;
   final String iconPath;
   TextInputType? textInputType;
+  String? initialValue;
 
   String? Function(String?)? validator;
   TextEditingController? controller = TextEditingController();
 
-  CustomizedTextForm(
-      {Key? key,
-      required this.title,
-      required this.iconPath,
-      required this.controller,
-      this.textInputType,
-      this.validator})
-      : super(key: key);
+  CustomizedTextForm({
+    Key? key,
+    required this.title,
+    required this.iconPath,
+    required this.controller,
+    this.textInputType,
+    this.validator,
+    this.initialValue,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

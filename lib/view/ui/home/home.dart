@@ -16,6 +16,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  TextEditingController search = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,7 +44,7 @@ class _HomePageState extends State<HomePage> {
                   CustomizedTextForm(
                     iconPath: "assets/images/search.png",
                     title: 'Search for a footballer...',
-                    controller: ,
+                    controller: search,
                   ),
                   const SizedBox(
                     height: 20,
@@ -52,11 +54,10 @@ class _HomePageState extends State<HomePage> {
                       builder: (context, value, child) => value.players.isEmpty
                           ? Column(
                               children: [
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: 40),
-                                  child: Image.asset("assets/images/empty.png"),
+                                const SizedBox(
+                                  height: 30,
                                 ),
+                                Image.asset("assets/images/empty.png"),
                                 const SizedBox(
                                   height: 20,
                                 ),
@@ -70,8 +71,11 @@ class _HomePageState extends State<HomePage> {
                               ],
                             )
                           : ListView.builder(
+                              padding: const EdgeInsets.all(0),
+                              shrinkWrap: true,
                               itemCount: value.players.length,
-                              itemBuilder: (context, index) => PlayerCard(),
+                              itemBuilder: (context, index) =>
+                                  PlayerCard(player: value.players[index]),
                             )),
                   const SizedBox(
                     height: 200,
