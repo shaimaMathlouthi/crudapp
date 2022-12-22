@@ -6,19 +6,21 @@ class CustomizedTextForm extends StatelessWidget {
   final String iconPath;
   TextInputType? textInputType;
   String? initialValue;
+  Function(String?)? onchanged;
 
   String? Function(String?)? validator;
   TextEditingController? controller = TextEditingController();
 
-  CustomizedTextForm({
-    Key? key,
-    required this.title,
-    required this.iconPath,
-    required this.controller,
-    this.textInputType,
-    this.validator,
-    this.initialValue,
-  }) : super(key: key);
+  CustomizedTextForm(
+      {Key? key,
+      required this.title,
+      required this.iconPath,
+      required this.controller,
+      this.textInputType,
+      this.validator,
+      this.initialValue,
+      this.onchanged})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -57,6 +59,7 @@ class CustomizedTextForm extends StatelessWidget {
                         const EdgeInsets.symmetric(horizontal: 10, vertical: 0),
                     child: Center(
                       child: TextFormField(
+                        onChanged: onchanged ?? (string) {},
                         style: TextStyle(fontSize: 14.sp.clamp(16, 24)),
                         keyboardType: textInputType ?? TextInputType.name,
                         controller: controller,

@@ -50,10 +50,15 @@ class PlayerCard extends StatelessWidget {
                       padding: const EdgeInsets.all(14),
                       child: Image.asset(
                         "assets/images/delete.png",
+                        height: 20,
+                        width: 20,
                         color: const Color.fromARGB(255, 244, 47, 47),
                       ),
                     ),
                   ),
+                ),
+                const SizedBox(
+                  width: 10,
                 ),
                 InkWell(
                   onTap: () {
@@ -73,7 +78,10 @@ class PlayerCard extends StatelessWidget {
                     // ignore: prefer_const_constructors
                     child: Padding(
                         padding: const EdgeInsets.all(14),
-                        child: const Icon(Icons.edit)),
+                        child: const Icon(
+                          Icons.edit,
+                          size: 20,
+                        )),
                   ),
                 )
               ],

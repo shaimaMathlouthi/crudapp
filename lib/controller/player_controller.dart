@@ -4,6 +4,7 @@ import '../model/player_model.dart';
 
 class PlayerController extends ChangeNotifier {
   List<Player> players = [];
+  List<Player> searchedPlayers = [];
 
   void addPlayer(Player player) {
     players.add(player);
@@ -24,5 +25,14 @@ class PlayerController extends ChangeNotifier {
     notifyListeners();
   }
 
-  void searchPlayer(int id) {}
+  void searchPlayer(String id) {
+    final suggestions = players.where((element) {
+      final playerName = element.id.toString().toLowerCase();
+      final input = id.toLowerCase();
+      return playerName.contains(input);
+    }).toList();
+
+    searchedPlayers = suggestions;
+    notifyListeners();
+  }
 }

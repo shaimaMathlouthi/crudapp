@@ -41,15 +41,17 @@ class _HomePageState extends State<HomePage> {
                   const SizedBox(
                     height: 20,
                   ),
-                  CustomizedTextForm(
-                    iconPath: "assets/images/search.png",
-                    title: 'Search for a footballer...',
-                    controller: search,
+                  Consumer<PlayerController>(
+                    builder: (context, value, child) => CustomizedTextForm(
+                      iconPath: "assets/images/search.png",
+                      title: 'Search for a footballer...',
+                      controller: search,
+                      onchanged: (a) => value.searchPlayer(a!),
+                    ),
                   ),
                   const SizedBox(
                     height: 20,
                   ),
-                  //...List.generate(4, (index) => const PlayerCard()),
                   Consumer<PlayerController>(
                       builder: (context, value, child) => value.players.isEmpty
                           ? Column(
@@ -73,9 +75,13 @@ class _HomePageState extends State<HomePage> {
                           : ListView.builder(
                               padding: const EdgeInsets.all(0),
                               shrinkWrap: true,
-                              itemCount: value.players.length,
-                              itemBuilder: (context, index) =>
-                                  PlayerCard(player: value.players[index]),
+                              itemCount: search.text.isEmpty
+                                  ? value.players.length
+                                  : value.searchedPlayers.length,
+                              itemBuilder: (context, index) => PlayerCard(
+                                  player: search.text.isEmpty
+                                      ? value.players[index]
+                                      : value.searchedPlayers[index]),
                             )),
                   const SizedBox(
                     height: 200,
