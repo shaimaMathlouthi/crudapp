@@ -147,6 +147,7 @@ class _AddPlayerState extends State<AddPlayer> {
                         name: name.text,
                         position: position.text,
                         salary: int.parse(salary.text)));
+
                     Navigator.pop(context);
                     showDialog(
                         context: context,

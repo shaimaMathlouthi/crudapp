@@ -60,6 +60,7 @@ class DeleteUser extends StatelessWidget {
                   builder: (context, value, child) => InkWell(
                     onTap: () {
                       value.deletePlayer(player);
+
                       Navigator.pop(context);
                     },
                     child: Container(

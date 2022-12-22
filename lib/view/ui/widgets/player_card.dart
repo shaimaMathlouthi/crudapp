@@ -30,7 +30,7 @@ class PlayerCard extends StatelessWidget {
                 ),
                 const SizedBox(width: 18),
                 Text(
-                  player.name,
+                  player.name!,
                   style: const TextStyle(
                       fontSize: 18, fontWeight: FontWeight.w600),
                 ),
@@ -111,7 +111,7 @@ class PlayerCard extends StatelessWidget {
                 ),
                 const SizedBox(width: 18),
                 Text(
-                  player.position,
+                  player.position!,
                   style: const TextStyle(
                       fontSize: 18, fontWeight: FontWeight.w600),
                 ),

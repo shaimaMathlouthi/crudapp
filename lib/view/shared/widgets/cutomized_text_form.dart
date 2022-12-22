@@ -6,6 +6,7 @@ class CustomizedTextForm extends StatelessWidget {
   final String iconPath;
   TextInputType? textInputType;
   String? initialValue;
+  Function? function;
   Function(String?)? onchanged;
 
   String? Function(String?)? validator;
@@ -19,6 +20,7 @@ class CustomizedTextForm extends StatelessWidget {
       this.textInputType,
       this.validator,
       this.initialValue,
+      this.function,
       this.onchanged})
       : super(key: key);
 
@@ -33,15 +35,20 @@ class CustomizedTextForm extends StatelessWidget {
         child: Row(children: [
           Expanded(
             flex: 2,
-            child: Container(
-              decoration: const BoxDecoration(
-                  color: Color.fromARGB(121, 123, 197, 250),
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(14),
-                      bottomLeft: Radius.circular(14))),
-              child: Image.asset(
-                iconPath,
-                color: const Color.fromARGB(121, 2, 131, 223),
+            child: GestureDetector(
+              onTap: () {
+                function?.call();
+              },
+              child: Container(
+                decoration: const BoxDecoration(
+                    color: Color.fromARGB(121, 123, 197, 250),
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(14),
+                        bottomLeft: Radius.circular(14))),
+                child: Image.asset(
+                  iconPath,
+                  color: const Color.fromARGB(121, 2, 131, 223),
+                ),
               ),
             ),
           ),

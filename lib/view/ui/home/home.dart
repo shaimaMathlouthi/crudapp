@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_crud_app/model/player_model.dart';
 import 'package:my_crud_app/view/shared/widgets/cutomized_text_form.dart';
 import 'package:my_crud_app/view/ui/add_player/add_player.dart';
 
@@ -43,46 +44,66 @@ class _HomePageState extends State<HomePage> {
                   ),
                   Consumer<PlayerController>(
                     builder: (context, value, child) => CustomizedTextForm(
+                      function: () {
+                        value.searchPlayer(int.tryParse(search.text) ?? 99999);
+                      },
                       iconPath: "assets/images/search.png",
                       title: 'Search for a footballer...',
                       controller: search,
-                      onchanged: (a) => value.searchPlayer(a!),
                     ),
                   ),
                   const SizedBox(
                     height: 20,
                   ),
-                  Consumer<PlayerController>(
-                      builder: (context, value, child) => value.players.isEmpty
-                          ? Column(
-                              children: [
-                                const SizedBox(
-                                  height: 30,
-                                ),
-                                Image.asset("assets/images/empty.png"),
-                                const SizedBox(
-                                  height: 20,
-                                ),
-                                const Text(
-                                    "Your Team is empty ! Add your first player",
-                                    style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w500,
-                                        color:
-                                            Color.fromARGB(121, 139, 139, 139)))
-                              ],
-                            )
-                          : ListView.builder(
-                              padding: const EdgeInsets.all(0),
-                              shrinkWrap: true,
-                              itemCount: search.text.isEmpty
-                                  ? value.players.length
-                                  : value.searchedPlayers.length,
-                              itemBuilder: (context, index) => PlayerCard(
-                                  player: search.text.isEmpty
-                                      ? value.players[index]
-                                      : value.searchedPlayers[index]),
-                            )),
+                  FutureBuilder(
+                    future: context
+                        .read<PlayerController>()
+                        .restProvider
+                        .getJoueurs(),
+                    builder: (context, AsyncSnapshot<List<Player?>> snapshot) {
+                      if (snapshot.hasData &&
+                          snapshot.data != null &&
+                          snapshot.data!.isEmpty) {
+                        return Column(
+                          children: [
+                            const SizedBox(
+                              height: 30,
+                            ),
+                            Image.asset("assets/images/empty.png"),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            const Text(
+                                "Your Team is empty ! Add your first player",
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w500,
+                                    color: Color.fromARGB(121, 139, 139, 139)))
+                          ],
+                        );
+                      }
+                      if (snapshot.hasData && snapshot.data != null) {
+                        return context
+                                    .read<PlayerController>()
+                                    .searchedPlayer !=
+                                null
+                            ? PlayerCard(
+                                player: context
+                                    .read<PlayerController>()
+                                    .searchedPlayer!)
+                            : ListView.builder(
+                                padding: EdgeInsets.zero,
+                                shrinkWrap: true,
+                                itemCount: snapshot.data!.length,
+                                itemBuilder: (context, index) => Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: PlayerCard(
+                                          player: snapshot.data![index]!),
+                                    ));
+                      }
+                      return const CircularProgressIndicator();
+                    },
+                  ),
                   const SizedBox(
                     height: 200,
                   ),

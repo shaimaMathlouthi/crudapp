@@ -144,7 +144,7 @@ class _EditPlayerState extends State<EditPlayer> {
                 child: const Padding(
                     padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
                     child: CustomButton(
-                      title: 'Add player',
+                      title: 'Edit player',
                     )),
               ),
             )
