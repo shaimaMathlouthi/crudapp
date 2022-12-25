@@ -57,7 +57,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   FutureBuilder(
                     future: context
-                        .read<PlayerController>()
+                        .watch<PlayerController>()
                         .restProvider
                         .getJoueurs(),
                     builder: (context, AsyncSnapshot<List<Player?>> snapshot) {

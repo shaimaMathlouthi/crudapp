@@ -1,10 +1,9 @@
 import 'dart:convert';
 
-import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:my_crud_app/model/player_model.dart';
 
-class RestProvider extends ChangeNotifier {
+class RestProvider {
   Future<List<Player>> getJoueurs() async {
     final joueurs = <Player>[];
     final response = await http
@@ -19,8 +18,9 @@ class RestProvider extends ChangeNotifier {
     return joueurs;
   }
 
-  Future createJoueur(Player player) {
-    return http.post(Uri.parse('http://10.0.2.2:8080/examen_tp/equipe/joueur'),
+  Future createJoueur(Player player) async {
+    return await http.post(
+        Uri.parse('http://10.0.2.2:8080/examen_tp/equipe/joueur'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },

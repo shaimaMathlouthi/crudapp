@@ -8,13 +8,13 @@ class PlayerController extends ChangeNotifier {
   Player? searchedPlayer;
   final RestProvider restProvider = RestProvider();
 
-  void addPlayer(Player player) {
-    restProvider.createJoueur(player);
+  void addPlayer(Player player) async {
+    await restProvider.createJoueur(player);
     notifyListeners();
   }
 
-  void deletePlayer(Player player) {
-    restProvider.deleteUser(player.id!);
+  void deletePlayer(Player player) async {
+    await restProvider.deleteUser(player.id!);
     notifyListeners();
   }
 
