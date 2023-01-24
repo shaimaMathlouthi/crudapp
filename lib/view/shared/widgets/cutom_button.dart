@@ -11,10 +11,10 @@ class CustomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: 70,
+        height: 65,
         width: 82.w,
         decoration: BoxDecoration(
-          color: const Color.fromARGB(121, 109, 192, 252),
+          color: Color.fromARGB(121, 240, 13, 39),
           borderRadius: BorderRadius.circular(14),
         ),
         child: Center(
